@@ -19,6 +19,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
+import { AuthService } from './auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
       { path: 'admin/orders', component: AdminOrdersComponent },
     ])
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
