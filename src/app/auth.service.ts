@@ -11,6 +11,10 @@ export class AuthService {
 
   constructor(private ngFireAuth: AngularFireAuth) {
     this.user$ = ngFireAuth.authState;
+
+    // ngFireAuth.authState.subscribe(loginInfo => {
+    //   this.user$ = loginInfo;
+    // });
   }
 
   login() {

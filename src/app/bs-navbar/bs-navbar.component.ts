@@ -7,7 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./bs-navbar.component.scss']
 })
 export class BsNavbarComponent {
-
   constructor(public authService: AuthService) {
   }
 
