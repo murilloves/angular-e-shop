@@ -1,43 +1,64 @@
-<form [formGroup]="eForm" (ngSubmit)="onSubmit()">
-
-  <!-- Product Title -->
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input formControlName="title" id="title" type="text" class="form-control">
-    <div class="alert alert-danger" *ngIf="eForm.controls['title'].invalid && eForm.controls['title'].touched">* Title is required.</div>
-  </div>
-
-  <!-- Product Price $ -->
-  <div class="form-group">
-    <label for="price">Price</label>
-    <div class="input-group">
-      <div class="input-group-prepend">
-        <span class="input-group-text">$</span>
+<div class="row flex-align">
+  <!-- CARD COLUMN -->
+  <div class="col-sm-12 col-md-6">
+    <div class="card m-auto" style="width: 18rem">
+      <img class="card-img-top img-placeholder"
+        [src]="imageUrl.value || 'https://vinneychopra.com/wp-content/uploads/2018/07/placeholder-image.jpg'"
+        [class.img-placeholder]="!imageUrl.value">
+      <div class="card-body">
+        <h5 class="card-title">{{ title.value }}</h5>
+        <p class="card-text">{{ price.value | currency: 'USD':true }}</p>
       </div>
-      <input formControlName="price" id="price" type="number" class="form-control">
     </div>
-    <div class="alert alert-danger" *ngIf="eForm.controls['price'].invalid && eForm.controls['price'].touched">* Price is required and should be 0 or higher</div>
   </div>
 
-  <!-- Product Category -->
-  <div class="form-group">
-    <label for="category">Category</label>
-    <select formControlName="category" id="category" type="text" class="form-control">
-      <option value=""></option>
-      <option *ngFor="let category of categories$" [value]="category.name">
-        {{ category.name }}
-      </option>
-    </select>
-    <div class="alert alert-danger" *ngIf="eForm.controls['category'].invalid && eForm.controls['category'].touched">* Category is required</div>
-  </div>
+  <!-- FORM COLUMN -->
+  <div class="col-sm-12 col-md-6">
+    <form [formGroup]="eForm" (ngSubmit)="onSubmit()">
 
-  <!-- Image Product URL -->
-  <div class="form-group">
-    <label for="imageUrl">Image URL</label>
-    <input formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
-    <div class="alert alert-danger" *ngIf="eForm.controls['imageUrl'].invalid && eForm.controls['imageUrl'].touched">* Valid Image URL is required</div>
-  </div>
+      <!-- Product Title -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input #title formControlName="title" id="title" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="eForm.controls['title'].invalid && eForm.controls['title'].touched">* Title is required.</div>
+      </div>
+    
+      <!-- Product Price $ -->
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">$</span>
+          </div>
+          <input #price formControlName="price" id="price" type="number" class="form-control">
+        </div>
+        <div class="alert alert-danger" *ngIf="eForm.controls['price'].invalid && eForm.controls['price'].touched">* Price is required and should be 0 or higher</div>
+      </div>
+    
+      <!-- Product Category -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select formControlName="category" id="category" type="text" class="form-control">
+          <option value=""></option>
+          <option *ngFor="let category of categories$" [value]="category.name">
+            {{ category.name }}
+          </option>
+        </select>
+        <div class="alert alert-danger" *ngIf="eForm.controls['category'].invalid && eForm.controls['category'].touched">* Category is required</div>
+      </div>
+    
+      <!-- Image Product URL -->
+      <div class="form-group">
+        <label for="imageUrl">Image URL</label>
+        <input #imageUrl formControlName="imageUrl" id="imageUrl" type="text" class="form-control">
+        <div class="alert alert-danger" *ngIf="eForm.controls['imageUrl'].invalid && eForm.controls['imageUrl'].touched">* Valid Image URL is required</div>
+      </div>
 
-  <!-- Save button -->
-  <button class="btn btn-primary">Save</button>
-</form>
+      <!-- Save button -->
+      <div class="mt-4 pull-right">
+        <button routerLink="/admin/products" class="btn btn-light mr-3">Cancel</button>
+        <button class="btn btn-primary" [disabled]="saving">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
