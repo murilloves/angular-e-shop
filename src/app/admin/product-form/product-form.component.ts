@@ -30,7 +30,7 @@ export class ProductFormComponent implements OnInit {
   initForm() {
     this.eForm = this.formBuilder.group({
       title: ['', [Validators.required]],
-      price: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.min(0)]],
       category: ['', [Validators.required]],
       imageUrl: ['', [Validators.required]]
     });
