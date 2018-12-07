@@ -5,6 +5,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
@@ -16,16 +17,17 @@ import { AdminProductsComponent } from './admin/admin-products/admin-products.co
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ProductsComponent } from './products/products.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 import { AuthService } from './auth.service';
 import { AuthGuardService } from './auth-guard.service';
 import { AdminAuthGuardService } from './admin-auth-guard.service';
-import { ProductFormComponent } from './admin/product-form/product-form.component';
 
-import { UserService } from './user.service';
 import { CategoryService } from './category.service';
+import { ProductService } from './product.service';
+import { UserService } from './user.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +45,8 @@ import { CategoryService } from './category.service';
     ProductFormComponent
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
@@ -79,8 +83,9 @@ import { CategoryService } from './category.service';
     AuthService,
     AuthGuardService,
     AdminAuthGuardService,
+    CategoryService,
+    ProductService,
     UserService,
-    CategoryService
   ],
   bootstrap: [AppComponent]
 })
