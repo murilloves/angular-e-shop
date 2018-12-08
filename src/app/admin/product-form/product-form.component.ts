@@ -3,6 +3,10 @@ import { CategoryService } from 'src/app/category.service';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { ProductService } from 'src/app/product.service';
 
+import { ValidateUrl } from 'src/app/validators/url-validator';
+import { ValidateAllFormFields } from 'src/app/validators/validate-form-fields';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -11,34 +15,47 @@ import { ProductService } from 'src/app/product.service';
 export class ProductFormComponent implements OnInit {
   categories$;
   eForm: FormGroup;
+  saving = false;
 
   constructor(
-    categoryService: CategoryService,
+    private router: Router,
     private formBuilder: FormBuilder,
     private productService: ProductService,
+    private categoryService: CategoryService,
   ) {
-    categoryService.getCategories()
+    this.categoryService.getCategories()
       .subscribe(response => {
         this.categories$ = response;
       });
   }
 
   ngOnInit() {
-    this.initForm();
+    this.initCleanForm();
   }
 
-  initForm() {
+  initCleanForm() {
     this.eForm = this.formBuilder.group({
       title: ['', [Validators.required]],
-      price: ['', [Validators.required]],
+      price: ['', [Validators.required, Validators.min(0)]],
       category: ['', [Validators.required]],
-      imageUrl: ['', [Validators.required]]
+      imageUrl: ['', [Validators.required, ValidateUrl]],
     });
   }
 
   onSubmit() {
-    const product = this.eForm.value;
-    this.productService.create(product);
+    if (this.eForm.invalid) {
+      ValidateAllFormFields(this.eForm);
+    } else {
+      this.saving = true;
+
+      const product = this.eForm.value;
+      this.productService.create(product);
+
+      setTimeout(() => {
+        this.initCleanForm();
+        this.router.navigate(['/admin/products']);
+      }, 900);
+    }
   }
 
 }

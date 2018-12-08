@@ -45,9 +45,9 @@ import { UserService } from './user.service';
     ProductFormComponent
   ],
   imports: [
+    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
