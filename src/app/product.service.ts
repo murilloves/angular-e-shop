@@ -25,6 +25,10 @@ export class ProductService {
             return { $key, ...data };
           })
         })
-      )
+      );
+  }
+
+  getById(productId) {
+    return this.ngFireDataBase.object(`/products/${productId}`);
   }
 }
