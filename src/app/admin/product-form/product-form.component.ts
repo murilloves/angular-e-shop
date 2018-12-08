@@ -23,7 +23,7 @@ export class ProductFormComponent implements OnInit {
     private productService: ProductService,
     private categoryService: CategoryService,
   ) {
-    this.categoryService.getCategories()
+    this.categoryService.getAll()
       .subscribe(response => {
         this.categories$ = response;
       });

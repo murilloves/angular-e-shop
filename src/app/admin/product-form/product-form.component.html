@@ -40,8 +40,8 @@
         <label for="category">Category</label>
         <select formControlName="category" id="category" type="text" class="form-control">
           <option value=""></option>
-          <option *ngFor="let category of categories$" [value]="category.name">
-            {{ category.name }}
+          <option *ngFor="let category of categories$" [value]="category.key$">
+            {{ category.key$ }}
           </option>
         </select>
         <div class="alert alert-danger" *ngIf="eForm.controls['category'].invalid && eForm.controls['category'].touched">* Category is required</div>
