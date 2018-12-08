@@ -14,6 +14,14 @@ export class ProductService {
     this.ngFireDataBase.list('/products').push(product);
   }
 
+  update(productId, product) {
+    this.ngFireDataBase.list('/products').update(productId, product);
+  }
+
+  delete(productId) {
+    return this.ngFireDataBase.object(`/products/${productId}`).remove();
+  }
+
   getAll() {
     return this.ngFireDataBase.list('/products')
       .snapshotChanges()

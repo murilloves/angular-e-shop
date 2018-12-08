@@ -73,13 +73,27 @@ export class ProductFormComponent implements OnInit {
       this.saving = true;
 
       const product = this.eForm.value;
-      this.productService.create(product);
+
+      if (this.productId) {
+        this.productService.update(this.productId, product);
+      } else {
+        this.productService.create(product);
+      }
 
       setTimeout(() => {
         this.initForm();
         this.router.navigate(['/admin/products']);
       }, 900);
     }
+  }
+
+  delete() {
+    if (!confirm('Are you sure you want to delete this product?')) {
+      return;
+    }
+
+    this.productService.delete(this.productId);
+    this.router.navigate(['/admin/products']);
   }
 
 }
