@@ -6,6 +6,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataTableModule } from 'angular5-data-table';
 
 import { AppComponent } from './app.component';
 import { environment } from './../environments/environment';
@@ -46,6 +47,7 @@ import { UserService } from './user.service';
   ],
   imports: [
     BrowserModule,
+    DataTableModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -63,13 +65,18 @@ import { UserService } from './user.service';
       { path: 'order-success', component: OrderSuccessComponent, canActivate: [AuthGuardService] },
 
       {
-        path: 'admin/products',
-        component: AdminProductsComponent,
+        path: 'admin/products/new',
+        component: ProductFormComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {
-        path: 'admin/products/new',
+        path: 'admin/products/:id',
         component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
         canActivate: [AuthGuardService, AdminAuthGuardService]
       },
       {

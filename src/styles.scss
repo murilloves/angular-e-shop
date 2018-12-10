@@ -4,3 +4,19 @@
 body {
     padding-top: 80px;
 }
+
+// Angular5 Data Table
+table {
+    border: 1px solid #ddd;
+}
+.data-table-wrapper {
+    margin-bottom: 3em;
+}
+.button-panel button {
+    background: #f6f6f6;
+    margin-left: 5px;
+    border: 1px solid #ccc;
+}
+.button-panel button:hover {
+    background: #eee;
+}

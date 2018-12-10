@@ -22,7 +22,7 @@
         <input #title formControlName="title" id="title" type="text" class="form-control">
         <div class="alert alert-danger" *ngIf="eForm.controls['title'].invalid && eForm.controls['title'].touched">* Title is required.</div>
       </div>
-    
+
       <!-- Product Price $ -->
       <div class="form-group">
         <label for="price">Price</label>
@@ -34,19 +34,19 @@
         </div>
         <div class="alert alert-danger" *ngIf="eForm.controls['price'].invalid && eForm.controls['price'].touched">* Price is required and should be 0 or higher</div>
       </div>
-    
+
       <!-- Product Category -->
       <div class="form-group">
         <label for="category">Category</label>
         <select formControlName="category" id="category" type="text" class="form-control">
           <option value=""></option>
-          <option *ngFor="let category of categories$" [value]="category.name">
+          <option *ngFor="let category of categories$" [value]="category.key$">
             {{ category.name }}
           </option>
         </select>
         <div class="alert alert-danger" *ngIf="eForm.controls['category'].invalid && eForm.controls['category'].touched">* Category is required</div>
       </div>
-    
+
       <!-- Image Product URL -->
       <div class="form-group">
         <label for="imageUrl">Image URL</label>
@@ -55,9 +55,16 @@
       </div>
 
       <!-- Save button -->
-      <div class="mt-4 pull-right">
-        <button routerLink="/admin/products" class="btn btn-light mr-3">Cancel</button>
-        <button class="btn btn-primary" [disabled]="saving">Save</button>
+      <div class="row mt-4">
+        <div class="col-12 col-md-6">
+          <button type="button" class="btn btn-danger" (click)="delete()" *ngIf="productId">Delete</button>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="pull-right">
+            <button type="button" class="btn btn-light mr-3" routerLink="/admin/products">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="saving">Save</button>
+          </div>
+        </div>
       </div>
     </form>
   </div>
